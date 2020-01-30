@@ -1,0 +1,8 @@
+{
+    "chromeDriverPath": "./chromedriver",
+    "userID": "userID",
+    "password": "password",
+    "signOnUrl": "https://signonurl.com",
+    "roomName": "RoomName",
+    "messagePrefix": "[Notify] New build is available!"
+}
