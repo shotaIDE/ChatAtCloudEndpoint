@@ -31,8 +31,6 @@ send_room_name = settings['roomName']
 send_message_prefix = settings['messagePrefix']
 
 options = Options()
-if not is_debug:
-    options.add_argument('--headless')
 browser = webdriver.Chrome(executable_path=chrome_driver_path, options=options)
 browser.get(sign_on_url)
 
@@ -63,10 +61,10 @@ for room_name_element in room_name_elements:
         f'{send_message_prefix}{send_message_suffix}')
 
     send_button = browser.find_element_by_id('send_btn')
-    if is_debug:
-        sleep(10)
-    else:
+    if not is_debug:
         send_button.click()
+
+    sleep(3)
     break
 
 browser.quit()
