@@ -14,11 +14,18 @@ TIMEOUT_SEC = 30
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--prod', action='store_true', default=False)
-parser.add_argument('suffix', type=str)
+parser.add_argument('--suffix', type=str, default=None)
+parser.add_argument('--file', type=str, default=None)
 arguments = parser.parse_args()
 
 is_debug = not arguments.prod
 send_message_suffix = arguments.suffix
+
+if send_message_suffix is None:
+    send_message_suffix_file = arguments.file
+    with open(send_message_suffix_file, 'r', encoding='utf8') as f:
+        send_message_suffix_list = f.readlines()
+        send_message_suffix = ''.join(send_message_suffix_list)
 
 with open('settings.json') as f:
     settings = json.load(f)
