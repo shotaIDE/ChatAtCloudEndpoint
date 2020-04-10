@@ -27,7 +27,7 @@ if send_message_suffix is None:
         send_message_suffix_list = f.readlines()
         send_message_suffix = ''.join(send_message_suffix_list)
 
-with open('settings.json') as f:
+with open('settings.json', 'r', encoding='utf8') as f:
     settings = json.load(f)
 
 chrome_driver_path = settings['chromeDriverPath']
