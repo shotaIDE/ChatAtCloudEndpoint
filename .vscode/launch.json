@@ -10,7 +10,10 @@
             "request": "launch",
             "program": "${workspaceRoot}/main.py",
             "console": "integratedTerminal",
-            "args": ["TestMessageSuffix"]
+            "args": [
+                "--suffix",
+                "TestMessageSuffix"
+            ]
         }
     ]
 }
