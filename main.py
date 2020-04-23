@@ -12,6 +12,31 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 TIMEOUT_SEC = 30
 
+def find_room(send_room_name: str):
+    room_name_elements = browser.find_elements_by_xpath(
+    '//*[contains(@class,\'room_name_content\')]')
+
+    for room_name_element in room_name_elements:
+        room_name = room_name_element.text
+
+        if room_name == send_room_name:
+            return room_name_element
+
+    browser.find_element_by_id(
+        'room_search_box_content').send_keys(send_room_name)
+
+    for count in range(5):
+        sleep(1)
+
+        room_name_elements = browser.find_elements_by_xpath(
+            '//*[contains(@class,\'room_name_content\')]')
+
+        for room_name_element in room_name_elements:
+            room_name = room_name_element.text
+
+            if room_name == send_room_name:
+                return room_name_element
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--prod', action='store_true', default=False)
 parser.add_argument('--suffix', type=str, default=None)
@@ -51,6 +76,9 @@ browser.find_element_by_link_text('Sign On').click()
 WebDriverWait(browser, TIMEOUT_SEC).until(
     EC.presence_of_element_located(
         (By.XPATH, '//*[contains(@class,\'room_name_content\')]')))
+
+room_name_element = find_room(send_room_name=send_room_name)
+
 room_name_elements = browser.find_elements_by_xpath(
     '//*[contains(@class,\'room_name_content\')]')
 
